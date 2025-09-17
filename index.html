@@ -3,10 +3,10 @@
 <head>
   <meta charset="utf-8">
   <meta name="description"
-        content="LAMPS">
-  <meta name="keywords" content="Learning from Demonstration, Task and Motion Planning, Manipulation Planning">
+        content="VLM-BTs">
+  <meta name="keywords" content="Multimodal Planning, Long-term Manipulation Tasks, Vision-Language Model, Behavior Tree">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>LAMPS</title>
+  <title>VLM-BTs</title>
 
 
   <script>
@@ -108,27 +108,30 @@
     <div class="container is-max-desktop">
       <div class="columns is-centered">
         <div class="column has-text-centered">
-          <h1 class="title is-1 publication-title" style="font-size: 2.55rem;">LAMPS💡: A Novel Robot Generalization Framework for Learning Adaptive Multi-Periodic Skills</h1>
+          <h1 class="title is-1 publication-title" style="font-size: 2.55rem;">Towards Object-level Multimodal Task Planning for Long-term Robotic Manipulation with Vision Language Model and Behavior Tree</h1>
 
           <div class="is-size-5 publication-authors">
             <span class="author-block">
-              <a href="https://aric.github.io/">Zezhi Liu</a><sup>1</sup>,</span>
               <a href="https://evallhq.github.io/">Hanqian Luo</a><sup>1,2</sup>,</span>
-              <a href="https://ai.nankai.edu.cn/info/1034/4844.htm">Xiao Liang</a><sup>1</sup>,</span>
+              <a href="https://aric.github.io/">Zezhi Liu</a><sup>1</sup>,</span>
+              <a href="https://www4.comp.polyu.edu.hk/~csjcao/">Jiannong Cao</a><sup>2</sup>,</span>
+			  <a href="https://qhemu.github.io/xiuxiuqi/">Xiuxiu Qi</a><sup>1,2</sup>,</span>
+			  <a href="https://wp.doc.ic.ac.uk/aese/people/julie-a-mccann/">Julie A. McCann</a><sup>3</sup>,</span>
               <a href="https://scholar.google.com/citations?user=SNyDfVoAAAAJ&hl=zh-CN&oi=ao">Yongchun Fang</a><sup>1</sup></span>
             </span>
           </div>
       
       <div class="is-size-5 publication-authors">
-        <span class="author-block"><sup>1</sup>Nanakai University, </span>
-        <span class="author-block"><sup>2</sup>The Hong Kong Polytechnic University</span>
+		  <span class="author-block"><sup>1</sup>Nanakai University, </span>
+		  <span class="author-block"><sup>2</sup>The Hong Kong Polytechnic University, </span>
+		  <span class="author-block"><sup>3</sup>Imperial College London</span>
       </div>
 
           <div class="column has-text-centered">
             <div class="publication-links">
               <!-- PDF Link. -->
               <span class="link-block">
-                <a href="https://nkrobotlab.github.io/LAMPS/"
+                <a href="https://nkrobotlab.github.io/VLM-BTs"
                    class="external-link button is-normal is-rounded is-dark">
                   <span class="icon">
                       <i class="fas fa-file-pdf"></i>
@@ -137,7 +140,7 @@
                 </a>
               </span>
               <span class="link-block">
-                <a href="https://nkrobotlab.github.io/LAMPS/"
+                <a href="https://nkrobotlab.github.io/VLM-BTs"
                    class="external-link button is-normal is-rounded is-dark">
                   <span class="icon">
                       <i class="ai ai-arxiv"></i>
@@ -157,7 +160,7 @@
               </span>
               <!-- Code Link. -->
               <span class="link-block">
-                <a href="https://nkrobotlab.github.io/LAMPS/"
+                <a href="https://nkrobotlab.github.io/VLM-BTs"
                    class="external-link button is-normal is-rounded is-dark">
                   <span class="icon">
                       <i class="fab fa-github"></i>
@@ -180,7 +183,7 @@
     <div class="hero-body" style="text-align: center;">
       <img id="teaser" src="./static/images/top.png" alt="Teaser Image" style="width: 75%; display: block; margin: 0 auto;">
       <h2 class="subtitle has-text-centered">
-        <span class="dnerf">The</span> executing of the multi-periodic movements skills.
+        <span class="dnerf">Our</span> proposed framework combines VLM with BT.
       </h2>
     </div>
   </div>
@@ -195,13 +198,12 @@
         <h2 class="title is-3">Abstract</h2>
         <div class="content has-text-justified">
           <p>
-Learning from Demonstrations (LfD) methods are applied to transfer human skills to robots from expert demonstrations, enabling them to perform complex tasks.
-However, existing methods often struggle to handle such long-horizon human skills as cleaning or wiping stains on the surface, which involve multiple periodic and transitional movement primitives. 
-To address this limitation, this paper first proposes a novel framework for segmenting, learning, and generalizing multi-periodic human skills, enabling robots to effectively learn different movement primitives and execute these skills in new scenarios.
-Specifically, The framework introduces an unsupervised learning method to segment long-horizon human demonstrations into periodic and discrete movement primitives. 
-Further, a novel type of discrete dynamical movement primitives, namely transitional movement primitives, is employed to enhance the fluidity of combining different periodic movement primitives in skills.
-To validate the effectiveness of the proposed approach, we conduct extensive experimental evaluations, including step-by-step validation of each procedure's methods in simulation and the implementation of the entire presented framework in the real world.
-The results confirm that the proposed framework accurately learns and generalizes multi-periodic human skills, providing a feasible solution for transferring complex multi-periodic demonstrations to robots in practical applications.
+Long-term robotic manipulation in open environments requires unifying multimodal understanding with reliable, geometry-aware execution.
+Classical robotic motion planning approaches demand extensive domain modeling and hand-crafted goal specifications, while emerging LLM/VLM pipelines propose semantically plausible yet lack feasibility guarantees and executable grounding. 
+To address the above limitations, we propose a hierarchical multimodal planning framework that combines VLM-based multimodal perception with behavior tree (BT) planning to bridge high-level semantic reasoning and low-level execution feasibility. 
+Our framework integrates natural language instructions with open-set visual geometry to generate object-level representations and language-conditioned prototype plans. 
+Then, a prompting-to-compilation scheme is designed to yield the BT planning with explicit controller–status pairs, conditions, and geometric feasibility checks.
+The proposed framework is validated through real-world experiments across three long-term robotic manipulation tasks, showing higher task success than VLM-only and BT-only baselines and demonstrating robust, fully autonomous execution without human intervention.
           </p>
         </div>
       </div>
