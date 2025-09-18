@@ -202,7 +202,7 @@ Long-term robotic manipulation in open environments requires unifying multimodal
 Classical robotic motion planning approaches demand extensive domain modeling and hand-crafted goal specifications, while emerging LLM/VLM pipelines propose semantically plausible yet lack feasibility guarantees and executable grounding. 
 To address the above limitations, we propose a hierarchical multimodal planning framework that combines VLM-based multimodal perception with behavior tree (BT) planning to bridge high-level semantic reasoning and low-level execution feasibility. 
 Our framework integrates natural language instructions with open-set visual geometry to generate object-level representations and language-conditioned prototype plans. 
-Then, a prompting-to-compilation scheme is designed to yield the BT planning with explicit controller–status pairs, conditions, and geometric feasibility checks.
+Then, a prompting-to-compilation scheme is designed to yield BT planning with explicit controller–status pairs, conditions of force, and geometric feasibility checks.
 The proposed framework is validated through real-world experiments across three long-term robotic manipulation tasks, showing higher task success than VLM-only and BT-only baselines and demonstrating robust, fully autonomous execution without human intervention.
           </p>
         </div>
