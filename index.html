@@ -313,6 +313,74 @@ The proposed framework is validated through real-world experiments across three 
   </div>
 </section>
 
+<section class="section">
+  <div class="container is-max-desktop">
+    
+    <div class="content" style="margin-bottom: 2rem;">
+      <h2>Example Results Analysis</h2>
+      <p>Several periodic MPs and transitional MPs are contained in multi-periodic skills in human daily life. The following results show the fluent performance.</p>
+    </div>
+
+    <div class="video-carousel-wrapper">
+      
+      <button class="carousel-btn left-btn" onclick="scrollCarousel(-1)">
+        &#10094;
+      </button>
+
+      <div id="video-track" class="video-track">
+        
+        <div class="video-item">
+          <video poster="" autoplay controls muted loop playsinline>
+            <source src="./static/videos/video1.mp4" type="video/mp4">
+          </video>
+          <p class="video-caption">Video 1</p>
+        </div>
+
+        <div class="video-item">
+          <video poster="" autoplay controls muted loop playsinline>
+            <source src="./static/videos/video2.mp4" type="video/mp4">
+          </video>
+          <p class="video-caption">Video 2</p>
+        </div>
+
+        <div class="video-item">
+          <video poster="" autoplay controls muted loop playsinline>
+            <source src="./static/videos/video3.mp4" type="video/mp4">
+          </video>
+          <p class="video-caption">Video 3</p>
+        </div>
+
+        <div class="video-item">
+          <video poster="" autoplay controls muted loop playsinline>
+            <source src="./static/videos/video4.mp4" type="video/mp4">
+          </video>
+          <p class="video-caption">Video 4</p>
+        </div>
+
+        <div class="video-item">
+          <video poster="" autoplay controls muted loop playsinline>
+            <source src="./static/videos/video5.mp4" type="video/mp4">
+          </video>
+          <p class="video-caption">Video 5</p>
+        </div>
+
+        <div class="video-item">
+          <video poster="" autoplay controls muted loop playsinline>
+            <source src="./static/videos/video6.mp4" type="video/mp4">
+          </video>
+          <p class="video-caption">Video 6</p>
+        </div>
+
+      </div>
+
+      <button class="carousel-btn right-btn" onclick="scrollCarousel(1)">
+        &#10095;
+      </button>
+
+    </div>
+    </div>
+</section>
+
 
 <section class="section" id="BibTeX">
   <div class="container is-max-desktop content">
@@ -420,5 +488,23 @@ The proposed framework is validated through real-world experiments across three 
 </script>
 
 
+<script>
+  function scrollCarousel(direction) {
+    const track = document.getElementById('video-track');
+    if (!track) return;
+
+    // 动态计算每次滚动的距离：取容器宽度的一半
+    const scrollAmount = track.clientWidth * 0.5;
+
+    if (direction === 1) {
+      // 向右滚
+      track.scrollLeft += scrollAmount;
+    } else {
+      // 向左滚
+      track.scrollLeft -= scrollAmount;
+    }
+  }
+</script>
+	
 </body>
 </html>
