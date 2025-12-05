@@ -489,35 +489,65 @@ The proposed framework is validated through real-world experiments across three 
 
 
 <script>
+  // 防止点击过快导致动画错乱的锁
+  let isTransitioning = false;
+
   function scrollCarousel(direction) {
+    if (isTransitioning) return; // 如果正在动画中，忽略点击
+
     const track = document.getElementById('video-track');
-    if (!track) return;
+    const items = track.getElementsByClassName('video-item');
+    
+    // 确保有元素
+    if (items.length === 0) return;
 
-    // 1. 获取当前视窗宽度作为每次滚动的距离
-    // (乘以 0.5 表示每次滚半屏，如果想一次滚一屏可以改成 1.0)
-    const scrollAmount = track.clientWidth * 0.5;
+    // 获取单个元素的完整宽度 (宽度 + gap)
+    // 我们计算第一个元素的宽度 + 轨道设置的 gap (20px)
+    const itemWidth = items[0].offsetWidth + 20; 
 
-    // 2. 计算最大可滚动距离 (总长度 - 视窗长度)
-    const maxScrollLeft = track.scrollWidth - track.clientWidth;
+    isTransitioning = true; // 上锁
 
-    // 3. 判断滚动方向
     if (direction === 1) {
-      // === 向右点击 ===
-      // 如果已经非常接近尽头 (允许 10px 的误差)，则跳回起点
-      if (track.scrollLeft >= maxScrollLeft - 10) {
-        track.scrollTo({ left: 0, behavior: 'smooth' }); // 回到开头
-      } else {
-        track.scrollLeft += scrollAmount; // 正常向右
-      }
+      // === 向右点击 (Next) ===
+      
+      // 1. 先让轨道向左滑动一个单位
+      track.style.transition = 'transform 0.5s ease-in-out';
+      track.style.transform = `translateX(-${itemWidth}px)`;
+
+      // 2. 动画结束后...
+      setTimeout(() => {
+        // 把第一个元素移动到最后面 (DOM 操作)
+        track.appendChild(items[0]);
+        
+        // 瞬间取消动画，并重置位置 (欺骗人眼)
+        track.style.transition = 'none';
+        track.style.transform = 'translateX(0)';
+        
+        isTransitioning = false; // 解锁
+      }, 500); // 500ms 必须对应 CSS 中的 transition 时间
 
     } else {
-      // === 向左点击 ===
-      // 如果已经在起点 (小于 10px)，则跳到尽头
-      if (track.scrollLeft <= 10) {
-        track.scrollTo({ left: maxScrollLeft, behavior: 'smooth' }); // 跳到最后
-      } else {
-        track.scrollLeft -= scrollAmount; // 正常向左
-      }
+      // === 向左点击 (Prev) ===
+      
+      // 1. 先瞬间取消动画
+      track.style.transition = 'none';
+      
+      // 2. 把最后一个元素移动到最前面
+      track.insertBefore(items[items.length - 1], items[0]);
+      
+      // 3. 瞬间把轨道往左推一个单位 (为了抵消刚刚加在前面的元素，保持视觉不动)
+      track.style.transform = `translateX(-${itemWidth}px)`;
+
+      // 4. 下一帧恢复动画，并滑回 0
+      setTimeout(() => {
+        track.style.transition = 'transform 0.5s ease-in-out';
+        track.style.transform = 'translateX(0)';
+        
+        // 等动画结束解锁
+        setTimeout(() => {
+          isTransitioning = false;
+        }, 500);
+      }, 10); // 短暂延迟确保浏览器渲染了位移
     }
   }
 </script>
