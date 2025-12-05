@@ -493,15 +493,31 @@ The proposed framework is validated through real-world experiments across three 
     const track = document.getElementById('video-track');
     if (!track) return;
 
-    // 动态计算每次滚动的距离：取容器宽度的一半
+    // 1. 获取当前视窗宽度作为每次滚动的距离
+    // (乘以 0.5 表示每次滚半屏，如果想一次滚一屏可以改成 1.0)
     const scrollAmount = track.clientWidth * 0.5;
 
+    // 2. 计算最大可滚动距离 (总长度 - 视窗长度)
+    const maxScrollLeft = track.scrollWidth - track.clientWidth;
+
+    // 3. 判断滚动方向
     if (direction === 1) {
-      // 向右滚
-      track.scrollLeft += scrollAmount;
+      // === 向右点击 ===
+      // 如果已经非常接近尽头 (允许 10px 的误差)，则跳回起点
+      if (track.scrollLeft >= maxScrollLeft - 10) {
+        track.scrollTo({ left: 0, behavior: 'smooth' }); // 回到开头
+      } else {
+        track.scrollLeft += scrollAmount; // 正常向右
+      }
+
     } else {
-      // 向左滚
-      track.scrollLeft -= scrollAmount;
+      // === 向左点击 ===
+      // 如果已经在起点 (小于 10px)，则跳到尽头
+      if (track.scrollLeft <= 10) {
+        track.scrollTo({ left: maxScrollLeft, behavior: 'smooth' }); // 跳到最后
+      } else {
+        track.scrollLeft -= scrollAmount; // 正常向左
+      }
     }
   }
 </script>
