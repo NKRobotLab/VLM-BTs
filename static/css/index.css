@@ -139,35 +139,38 @@ body {
 .video-carousel-wrapper {
   position: relative;
   width: 100%;
-  padding: 0 10px; /* 防止左右边缘过于贴合 */
+  padding: 0 10px;
+  overflow: hidden; /* 关键：隐藏超出部分，禁止手动滚动 */
 }
 
 /* 视频轨道 */
 .video-track {
   display: flex;
-  gap: 15px;            /* 视频间距 */
-  overflow-x: auto;     /* 允许横向滚动 */
-  scroll-behavior: smooth; 
-  padding-bottom: 10px;
-  /* 隐藏滚动条 */
-  scrollbar-width: none; 
-  -ms-overflow-style: none;
-}
-.video-track::-webkit-scrollbar {
-  display: none;
+  gap: 20px;            /* 视频间距 */
+  width: max-content;   /* 宽度根据内容自动撑开 */
+  transition: transform 0.5s ease-in-out; /* 关键：添加移动动画 */
+  will-change: transform;
 }
 
 /* 单个视频卡片 */
+/* 注意：这里我们改用具体的宽度逻辑，不再依赖 flex百分比，方便JS计算 */
 .video-item {
-  /* 下面这行决定一排显示几个：32% 约等于一排3个 */
-  flex: 0 0 32%; 
+  width: 300px; /* 你可以根据需要调整这个基础宽度 */
+  flex-shrink: 0; /* 防止被压缩 */
   text-align: center;
+}
+
+/* 响应式调整宽度 */
+@media (max-width: 768px) {
+  .video-item {
+    width: 280px; /* 手机上稍微窄一点 */
+  }
 }
 
 .video-item video {
   width: 100%;
   border-radius: 5px;
-  background: #000; /* 视频未加载时的背景色 */
+  background: #000;
   display: block;
 }
 
@@ -178,10 +181,10 @@ body {
   font-weight: 600;
 }
 
-/* 按钮通用样式 */
+/* 按钮样式保持不变... */
 .carousel-btn {
   position: absolute;
-  top: 40%; /* 垂直居中稍微偏上一点，避开文字 */
+  top: 40%;
   transform: translateY(-50%);
   background-color: rgba(0, 0, 0, 0.6);
   color: white;
@@ -196,29 +199,5 @@ body {
   justify-content: center;
   transition: background-color 0.3s;
 }
-
-.carousel-btn:hover {
-  background-color: rgba(0, 0, 0, 0.9);
-}
-
-/* 按钮位置：默认放在内容外部 */
-.left-btn { left: -45px; }
-.right-btn { right: -45px; }
-
-/* 响应式：屏幕变窄时，按钮移到视频内部，视频变大 */
-@media (max-width: 1024px) {
-  .left-btn { left: 5px; }
-  .right-btn { right: 5px; }
-  
-  /* 平板/小屏下一排显示2个 */
-  .video-item {
-    flex: 0 0 48%; 
-  }
-}
-
-@media (max-width: 768px) {
-  /* 手机端一排显示1个 */
-  .video-item {
-    flex: 0 0 90%; 
-  }
-}
+.left-btn { left: 5px; }
+.right-btn { right: 5px; }
